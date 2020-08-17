@@ -59,11 +59,11 @@ namespace NoticiasAPI.Services
             }
         }
 
-        public Boolean EliminarNoticia(int NoticiaID)
+        public Boolean EliminarNoticia(int _noticiaID)
         {
             try
             {
-                var noticiaBD = _noticiaDbContext.Noticia.Where(busqueda => busqueda.NoticiaID == NoticiaID).FirstOrDefault();
+                var noticiaBD = _noticiaDbContext.Noticia.Where(busqueda => busqueda.NoticiaID == _noticiaID).FirstOrDefault();
                 _noticiaDbContext.Remove(noticiaBD);
                 _noticiaDbContext.SaveChanges();
                 

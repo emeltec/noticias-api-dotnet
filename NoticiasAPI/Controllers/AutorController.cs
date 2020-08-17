@@ -11,41 +11,41 @@ namespace NoticiasAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class NoticiaController : ControllerBase
+    public class AutorController : ControllerBase
     {
-        private readonly NoticiaService _noticiaService;
-        public NoticiaController(NoticiaService noticiaService)
+        private readonly AutorService _autorService;
+        public AutorController(AutorService autorService)
         {
-            _noticiaService = noticiaService;
+            _autorService = autorService;
         }
 
         [HttpGet]
-        [Route("obtener")] //api/noticia/obtener
+        [Route("obtener")] //api/autor/obtener
         public IActionResult Obtener()
         {
-            var resultado = _noticiaService.Obtener();
+            var resultado = _autorService.Obtener();
             return Ok(resultado);
         }
 
         [HttpPost]
-        [Route("agregar")] //api/noticia/agregar
-        public IActionResult Agregar([FromBody] Noticia _noticia)
+        [Route("agregar")] //api/autor/agregar
+        public IActionResult Agregar([FromBody] Autor _autor)
         {
-            var resultado = _noticiaService.AgregarNoticia(_noticia);
+            var resultado = _autorService.AgregarAutor(_autor);
             if (resultado)
             {
                 return Ok();
             } else
             {
                 return BadRequest();
-            } 
+            }
         }
 
         [HttpPut]
-        [Route("editar")] //api/noticia/editar
-        public IActionResult Editar([FromBody] Noticia _noticia)
+        [Route("editar")] //api/autor/editar
+        public IActionResult Editar([FromBody] Autor _autor)
         {
-            var resultado = _noticiaService.EditarNoticia(_noticia);
+            var resultado = _autorService.EditarAutor(_autor);
             if (resultado)
             {
                 return Ok();
@@ -54,23 +54,21 @@ namespace NoticiasAPI.Controllers
             {
                 return BadRequest();
             }
-
         }
 
         [HttpDelete]
-        [Route("eliminar/{noticiaID}")]
-        public IActionResult Eliminar(int noticiaID)
+        [Route("eliminar/{autorID}")] // api/autor/eliminar/1
+        
+        public IActionResult Eliminar(int autorID)
         {
-            var resultado = _noticiaService.EliminarNoticia(noticiaID);
+            var resultado = _autorService.EliminarAutor(autorID);
             if (resultado)
             {
                 return Ok();
-            }
-            else
+            } else
             {
                 return BadRequest();
             }
         }
-
     }
 }

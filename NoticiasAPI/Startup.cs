@@ -31,6 +31,12 @@ namespace NoticiasAPI
             services.AddControllers();
             services.AddDbContext<NoticiasDBContext>(opciones => opciones.UseSqlServer(connection));
             services.AddTransient<NoticiaService, NoticiaService>();
+            services.AddTransient<AutorService, AutorService>();
+
+            services.AddCors(opciones =>
+            {
+                opciones.AddPolicy("PerimitirTodo", acceso => acceso.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +46,8 @@ namespace NoticiasAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseCors("PermitirTodo");
 
             app.UseHttpsRedirection();
 
